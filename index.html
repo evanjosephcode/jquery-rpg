@@ -44,7 +44,7 @@
 
 $(document).ready(function() {
 
-  alert("you are new to the game, click the character you want to be first and the enemy second. If you defeat the enemy, click the next one you want to take on!");
+  alert("click the character you want to be, then click the one you want to fight, then click YOUR character TO FIGHT");
 
 
 
@@ -72,17 +72,19 @@ $(document).ready(function() {
     alert("you chose Jay as your dude, he has 120 health!");
     $("#images img.jay").detach().appendTo(".chosen");
     hero = 120; 
-    addClass(hero);
-    isCharacterChosen = true; 
+    $(".jay").addClass("test"); 
       
     }
 
 
 
   if (counterChar === 2) {
-    if (isCharacterChosen = true) {
-      alert("you cant fight against yourself, at least in this game!")
-  }
+    if ($(this).hasClass('test')) {
+    
+    
+      alert("you cant fight against yourself, at least in this game!");
+      counterChar = 1; 
+    }
 
     else {
     $("#images img.jay").detach().appendTo(".enemydisplay");
@@ -92,8 +94,6 @@ $(document).ready(function() {
     alert("its time to battle!");
     $(".jay").addClass("enemy");
   }}
-  // add versus to div but comes out weird $('<p>VERSUS</p>').appendTo(".versus");
-
 
 
   if (counterChar >= 3) {
@@ -130,17 +130,26 @@ $(document).ready(function() {
     $("#images img.mark").detach().appendTo(".chosen");
     hero = 180; 
     alert("you chose Mark as your dude, he has 180 health!");
+    $(".mark").addClass("test");
 
   }
 
   if (counterChar === 2) {
+    if ($(this).hasClass('test')) {
+    
+    
+    alert("you cant fight against yourself, at least in this game!");
+    counterChar = 1; 
+  }
+
+  else {
     alert("You chose Mark as your enemy, he has 180 health")
     alert("its time to battle!");
     $("#images img.mark").detach().appendTo(".enemydisplay");
     $('<p>VERSUS</p>').appendTo(".versus");
     opponent = 180;
     $(".mark").addClass("enemy");
-
+  }
     
 
 
@@ -149,7 +158,7 @@ $(document).ready(function() {
   if (counterChar >= 3) {
 
 
-    this.opponent -= 60;
+    opponent -= 60;
     hero -= 10; 
     alert("This is your opponent's health "+ opponent);
     alert("This is your health "+hero);
@@ -175,19 +184,29 @@ $(document).ready(function() {
   alert("You chose dubious Disney Puffin, he has 80 health!");
   $("#images img.puffin").detach().appendTo(".chosen");
   hero = 80; 
+  $(".puffin").addClass("test");
 
   }
 
   if (counterChar === 2) {
+    if ($(this).hasClass('test')) {
+    
+    
+    alert("you cant fight against yourself, at least in this game!");
+    counterChar = 1; 
+  }
+
+  else {
 
   
   opponent = 80;
   $(".puffin").addClass("enemy");
-  alert("you chose dubious Disney Puffin as the enemy, he has 80 health!"+ enemy);
+  alert("you chose dubious Disney Puffin as the enemy, he has 80 health!");
   alert("its time to battle!");
   $('<p>VERSUS</p>').appendTo(".versus");
   $("#images img.puffin").detach().appendTo(".enemydisplay");
   }
+}
 
   if (counterChar >= 3) {
     opponent -= 10;
@@ -221,11 +240,22 @@ $(document).ready(function() {
     alert("You chose introspective Silent Bob, he has 220 health!");
     hero = 220; 
     $("#images img.bob").detach().appendTo(".chosen");
+    $(".bob").addClass("test");
+
 
 
   }  
 
   if (counterChar === 2) {
+    if ($(this).hasClass('test')) {
+    
+    
+    alert("you cant fight against yourself, at least in this game!");
+    counterChar = 1; 
+  }
+
+  else {
+
 
   alert("you chose introspective Silent Bob as the enemy, he has 220 health!")
   alert("its time to battle!");
@@ -235,6 +265,7 @@ $(document).ready(function() {
   $("#images img.bob").detach().appendTo(".enemydisplay");
 
 
+  }
   }
 
   if (counterChar >= 3) {
@@ -266,16 +297,27 @@ $(document).ready(function() {
   alert("You chose the Dude, sweet dude he has 200 health!");
   $("#images img.dude").detach().appendTo(".chosen");
   hero = 200; 
+  $(".dude").addClass("test");
 
   }
 
   if (counterChar === 2) {
+    if ($(this).hasClass('test')) {
+    
+    
+    alert("you cant fight against yourself, at least in this game!");
+    counterChar = 1; 
+  }
+  
+
+  else {
     oponent = 200; 
     alert("you chose the dude as your enemy, he has 200 health!")
     alert("its time to battle!");
     $(".dude").addClass("enemy");
     $('<p>VERSUS</p>').appendTo(".versus");
     $("#images img.dude").detach().appendTo(".enemydisplay");
+  }
   }
 
   if (counterChar >= 3) {

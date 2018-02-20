@@ -24,3 +24,14 @@ color: orange;
 .images {
     clear: both;
 }
+
+.test {
+    border-style: solid;
+    border-width: 10px;
+    border-color: rgb(16, 240, 16);
+
+}
+
+.mark {
+    padding: 0px;
+}
