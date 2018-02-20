@@ -40,57 +40,6 @@
   </div>
 </div>
 
-  <div class="container">
-
-    <div class="row">
-
-      <!-- Calculator Panel -->
-      <div class="col-lg-4">
-        <div class="card">
-          <h3 class="card-header">Calculator</h3>
-
-          <div class="card-body">
-            <button id="button-1" class="btn btn-primary number" value="1"><h1>1</h1></button>
-            <button id="button-2" class="btn btn-primary number" value="2"><h1>2</h1></button>
-            <button id="button-3" class="btn btn-primary number" value="3"><h1>3</h1></button>
-            <button id="button-4" class="btn btn-primary number" value="4"><h1>4</h1></button>
-
-            <!-- nullifying other buttons for now
-            <button id="button-5" class="btn btn-primary number" value="5"><h1>5</h1></button>
-            <button id="button-6" class="btn btn-primary number" value="6"><h1>6</h1></button>
-            <button id="button-minus" class="btn btn-danger operator" value="minus"><h1>&minus;</h1></button>
-            <br><br>
-            <button id="button-7" class="btn btn-primary number" value="7"><h1>7</h1></button>
-            <button id="button-8" class="btn btn-primary number" value="8"><h1>8</h1></button>
-            <button id="button-9" class="btn btn-primary number" value="9"><h1>9</h1></button>
-            <button id="button-multiply" class="btn btn-danger operator" value="times"><h1>&times;</h1></button>
-            <br><br>
-            <button id="button-0" class="btn btn-primary number" value="0"><h1>0</h1></button>
-            <button id="button-divide" class="btn btn-danger operator" value="divide"><h1>&divide;</h1></button>
-            <button id="button-power" class="btn btn-danger operator" value="power"><h1>^</h1></button>
-            <button id="button-equal" class="btn btn-success equal" value="equals"><h1>=</h1></button>
-            <br><br>
-            <button id="button-clear" class="btn btn-dark clear" value="clear"><h1>clear</h1></button>  -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Result Panel -->
-      <div class="col-lg-6">
-        <div class="card">
-          <h3 class="card-header">Result</h3>
-          <div class="card-body">
-            <h1 id="first-number"></h1>
-            <h1 id="operator"></h1>
-            <h1 id="second-number"></h1>
-            <hr>
-            <h1 id="result"></h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -102,42 +51,50 @@ $(document).ready(function() {
 
   var isCharacterChosen = false;
   var counterChar = 0
-  //hp for chars 
-  var hpJay = 120
-  var hpMark = 180
-  var hpPuffin = 80
-  var hpBob = 220
-  var hpDude = 200
+  //hp for chars for reference 
+  // var hpJay = 120
+  //var hpMark = 180
+  // var hpPuffin = 80
+  // var hpBob = 220
+  // var hpDude = 200
   var hero = "";
-  var opponent = ""; 
+  var opponent = "";
+
+  
 
 
   $(".jay").on("click", function() {
 
-  
-
-  
-  counterChar += 1;
+  counterChar += 1
 
 
   if (counterChar === 1) {
     alert("you chose Jay as your dude, he has 120 health!");
     $("#images img.jay").detach().appendTo(".chosen");
     hero = 120; 
+    addClass(hero);
+    isCharacterChosen = true; 
+      
+    }
 
 
-    
-  }
 
   if (counterChar === 2) {
+    if (isCharacterChosen = true) {
+      alert("you cant fight against yourself, at least in this game!")
+  }
+
+    else {
     $("#images img.jay").detach().appendTo(".enemydisplay");
     $('<p>VERSUS</p>').appendTo(".versus");
     opponent = 120; 
     alert("You chose Jay as your enemy, he has 120 health")
     alert("its time to battle!");
     $(".jay").addClass("enemy");
+  }}
   // add versus to div but comes out weird $('<p>VERSUS</p>').appendTo(".versus");
-  }
+
+
 
   if (counterChar >= 3) {
     opponent -= 80;
@@ -149,7 +106,8 @@ $(document).ready(function() {
     alert("you beat the enemy!");
     $(".enemy").remove();
     $(".versus").empty();
-    counterChar = 1; 
+    counterChar = 1;
+    
 
   }
 
@@ -189,7 +147,9 @@ $(document).ready(function() {
   }
 
   if (counterChar >= 3) {
-    opponent -= 60;
+
+
+    this.opponent -= 60;
     hero -= 10; 
     alert("This is your opponent's health "+ opponent);
     alert("This is your health "+hero);
@@ -220,10 +180,11 @@ $(document).ready(function() {
 
   if (counterChar === 2) {
 
-  alert("you chose dubious Disney Puffin as the enemy, he has 80 health!");
-  alert("its time to battle!");
+  
+  opponent = 80;
   $(".puffin").addClass("enemy");
-  enemy = 80;
+  alert("you chose dubious Disney Puffin as the enemy, he has 80 health!"+ enemy);
+  alert("its time to battle!");
   $('<p>VERSUS</p>').appendTo(".versus");
   $("#images img.puffin").detach().appendTo(".enemydisplay");
   }
@@ -241,6 +202,11 @@ $(document).ready(function() {
     counterChar = 1; 
   
     }}
+
+  if (hero <= 0) {
+    alert("you lost!")
+    location.reload();
+  }
 
 
 
@@ -263,7 +229,7 @@ $(document).ready(function() {
 
   alert("you chose introspective Silent Bob as the enemy, he has 220 health!")
   alert("its time to battle!");
-  enemy = 220; 
+  opponent = 220; 
   $(".bob").addClass("enemy");
   $('<p>VERSUS</p>').appendTo(".versus");
   $("#images img.bob").detach().appendTo(".enemydisplay");
@@ -304,7 +270,7 @@ $(document).ready(function() {
   }
 
   if (counterChar === 2) {
-    enemy = 200; 
+    oponent = 200; 
     alert("you chose the dude as your enemy, he has 200 health!")
     alert("its time to battle!");
     $(".dude").addClass("enemy");
@@ -324,13 +290,10 @@ $(document).ready(function() {
     $(".versus").empty();
     counterChar = 1; 
 
-  }
-
-  }
-
-  
+  }};
   });
 });
+
 
 </script>
 
