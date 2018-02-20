@@ -5,27 +5,34 @@
   <title>jQuery RPG</title>
 
   <!-- Added link to the jQuery Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- Added a link to Bootstrap-->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
 
-  <div class="jumbotron">
+<div class="jumbotron">
     <h1 class="text-center">jQuery RPG</h1>
-    <h3 class="text-center">Pick a character, and choose wisely Young jQuery-Game Consumer Padawan</h3>
-  </div>
+    <h3 class="text-center instructions">Pick a character, and choose wisely Young Game Consumer-Padawan</h3>
+    <h3 class="text-center force">... (I am one with the force, and the force is one with me)</h3>
+</div>
 
-  <img class="jay" src="assets/images/j.jpg" alt="Jay from Jay and Silent Bob">
-  <img class="mark" src="assets/images/m.jpg" alt="Evil Mark Hamill">
-  <img class="puffin" src="assets/images/p.jpg" alt="Puffin">
-  <img class="bob" src="assets/images/s.jpg" alt="Silent Bob">
-  <img class="dude" src="assets/images/w.jpg" alt="The Dude">
+<div id="chosen" class="text-center chosen col-lg-12 col-md-12">Text </div>
+<div class="versus"></div>
+<div id="images" class="text-center images col-lg-12 col-md-12">
+    <img id="jay" class="jay" src="assets/images/j.jpg" alt="Jay from Jay and Silent Bob">
+    <img class="mark" src="assets/images/m.jpg" alt="Evil Mark Hamill">
+    <img class="puffin" src="assets/images/p.jpg" alt="Puffin">
+    <img class="bob" src="assets/images/s.jpg" alt="Silent Bob">
+    <img class="dude" src="assets/images/w.jpg" alt="The Dude">
+</div>
 
   <div class="container">
 
@@ -78,113 +85,87 @@
     </div>
   </div>
 
-  <script type="text/javascript">
+<script type="text/javascript">
 
-    $(document).ready(function() {
+var isCharacterChosen = false;
+var counterChar = 0
+//hp for chars 
+var hpJay = 120
+var hpMark = 180
+var hpPuffin = 80
+var hpBob = 220
+var hpDude = 200
 
-      // Make our variables global to the runtime of our application
-      var firstNumber = 0;
-      var secondNumber = 0;
-      var operator = "";
-      var result = 0;
-      var isOperatorChosen = false;
-      var isCalculated = false;
 
-      // Use a function to initialize our calculator.
-      // This way when the user hits clear, we can guarantee a reset of the app.
-      function initializeCalculator() {
-        firstNumber = "";
-        secondNumber = "";
-        operator = "";
-        isOperatorChosen = false;
-        isCalculated = false;
 
-        $("#first-number, #second-number, #operator, #result").empty();
-      }
 
-      $(".card").on("click", ".number", function() {
+$(".jay").on("click", function() {
 
-        // Check if we've already run a calculation, if so... we'll just.
-        if (isCalculated) {
-          return false;
-        }
+// counter goes up one
+counterChar += 1;
+//set up alert
+alert("You chose wise " + counterChar + " Jay!"); 
+// moves img to div
+$("#images img.jay").detach().appendTo(".chosen");
 
-        // If operator is chosen, we should be writing the secondNumber, otherwise, the firstNumber
-        if (isOperatorChosen) {
-          secondNumber += $(this).val();
-          $("#second-number").text(secondNumber);
+if (counterChar === 1) {
 
-        }
-        else {
-          firstNumber += $(this).val();
-          $("#first-number").text(firstNumber);
-        }
+addClass("friend");
+// add versus to div but comes out weird $('<p>VERSUS</p>').appendTo(".versus");
+}
 
-      }).on("click", ".operator", function() {
+if (counterChar === 2) {
 
-        // Check if a first number has already been selected
-        // Or we've already run a calculation, if so we just exit.
-        if (!firstNumber || isCalculated) {
-          return false;
-        }
+alert("its time to battle!");
+// add versus to div but comes out weird $('<p>VERSUS</p>').appendTo(".versus");
+}
 
-        // Set isOperatorChosen to true so we start writing to secondNumber
-        isOperatorChosen = true;
+});
 
-        // Store off the operator
-        operator = $(this).val();
+$(".mark").on("click", function() {
+counterChar += 1;
+alert("You chose evil Mark!");
+$("#images img.mark").detach().appendTo(".chosen");
 
-        // Set the HTML of the #operator to the text of what was clicked
-        $("#operator").text($(this).text());
+if (counterChar === 2) {
 
-      }).on("click", ".equal", function() {
+alert("its time to battle!");
+}
 
-        // If we already clicked equal, don't do the calculation again
-        if (isCalculated) {
-          return false;
-        }
+});
 
-        // Set isCalculated to true so that we don't get in a weird UI state by clicking buttons again
-        isCalculated = true;
+$(".puffin").on("click", function() {
+counterChar += 1;
+alert("You chose dubious Disney Puffin!");
+$("#images img.puffin").detach().appendTo(".chosen");
 
-        // Use parseInt to convert our string representation of numbers into actual integers
-        firstNumber = parseInt(firstNumber);
-        secondNumber = parseInt(secondNumber);
+if (counterChar === 2) {
 
-        // Based on the operator that was chosen.
-        // Then run the operation and set the HTML of the result of that operation
-        if (operator === "plus") {
-          result = firstNumber + secondNumber;
-        }
+alert("its time to battle!");
+}
 
-        else if (operator === "minus") {
-          result = firstNumber - secondNumber;
-        }
+});
 
-        else if (operator === "times") {
-          result = firstNumber * secondNumber;
-        }
+$(".bob").on("click", function() {
+counterChar += 1;
+alert("You chose introspective Silent Bob!");
+$("#images img.bob").detach().appendTo(".chosen");
 
-        else if (operator === "divide") {
-          result = firstNumber / secondNumber;
-        }
+if (counterChar === 2) {
 
-        else if (operator === "power") {
-          result = Math.pow(firstNumber, secondNumber);
-        }
+alert("its time to battle!");
+}
 
-        $("#result").text(result);
+});
 
-      }).on("click", ".clear", function () {
+$(".dude").on("click", function() {
+counterChar += 1;
+alert("You chose the Dude, sweet dude!");
+$("#images img.dude").detach().appendTo(".chosen");
 
-        // Call initializeCalculater so we can reset the state of our app
-        initializeCalculator();
 
-      });
 
-      // Call initializeCalculater so we can set the state of our app
-      initializeCalculator();
-    });
+});
 
 </script>
 

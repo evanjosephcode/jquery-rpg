@@ -1,0 +1,26 @@
+.jumbotron {
+    background-color: rgba(20, 52, 238, 0.829);
+}
+
+h1 {
+font-family: 'Permanent Marker', cursive;
+font-size: 80px;
+color: white;
+}
+
+.instructions {
+font-family: 'Rock Salt', cursive;
+font-size: 24px;
+color: rgba(221, 243, 22, 0.89);
+}
+
+.force {
+font-family: 'Rock Salt', cursive;
+font-size: 18px;
+color: orange;
+
+}
+
+.images {
+    clear: both;
+}
