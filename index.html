@@ -29,6 +29,13 @@
   <div class="text-center versus col-lg-4 col-md-4"></div>
   <div id="enemy" class="enemydisplay col-lg-4 col-md-4"></div>
 </div>
+<div class="row">
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-4 col-md-4">
+      <button id="button-1" class="btn btn-primary number"><p>Attack</p></button>
+    </div>
+    <div class="col-lg-4 col-md-4"></div>
+  </div>
 
 <div class="row"></div>
   <div id="images" class="text-center images col-lg-12 col-md-12">
@@ -46,10 +53,16 @@ $(document).ready(function() {
 
   alert("click the character you want to be, then click the one you want to fight, then click YOUR character TO FIGHT");
 
+  // $("#images").on("click", function() {
+      // if (counterChar >= 3) {
+      // alert("click your character, fool");
+  // }
+  // });
 
 
 
   var isCharacterChosen = false;
+  var markChosen = false; 
   var counterChar = 0
   //hp for chars for reference 
   // var hpJay = 120
@@ -59,6 +72,13 @@ $(document).ready(function() {
   // var hpDude = 200
   var hero = "";
   var opponent = "";
+
+
+  // var jay = {healthPoints:120, attackPower:8, counterAttackPower: 8}
+  // var mark = {healthPoints: 180, attackPower: 6, counterAttackPower: 6}
+  // var puffin = {healthPoints: 80, attackPower: 2, counterAttackPower: 2}
+  // var bob = {healthPoints: 220, attackPower: 7, counterAttackPower: 7}
+  // var dude = {healthPoints: 200, attackPower 6, counterAttackPower: 6}
 
   
 
@@ -98,7 +118,7 @@ $(document).ready(function() {
 
   if (counterChar >= 3) {
     opponent -= 80;
-    hero -= 5; 
+    hero -= 10; 
     alert("This is your opponent's health "+ opponent);
     alert("This is your health "+hero);
     
@@ -107,6 +127,7 @@ $(document).ready(function() {
     $(".enemy").remove();
     $(".versus").empty();
     counterChar = 1;
+
     
 
   }
@@ -116,6 +137,7 @@ $(document).ready(function() {
   if (hero <= 0) {
     alert("the enemy beat you -- game over!");
   }
+  
 
   });
 
@@ -149,6 +171,7 @@ $(document).ready(function() {
     $('<p>VERSUS</p>').appendTo(".versus");
     opponent = 180;
     $(".mark").addClass("enemy");
+
   }
     
 
