@@ -72,13 +72,26 @@ $(document).ready(function() {
   // var hpDude = 200
   var hero = "";
   var opponent = "";
+  var attackClicks = 0
 
 
-  // var jay = {healthPoints:120, attackPower:8, counterAttackPower: 8}
+
+  
+
+  var jay = {healthPoints:120, attackPower:8, counterAttackPower: 8}
   // var mark = {healthPoints: 180, attackPower: 6, counterAttackPower: 6}
   // var puffin = {healthPoints: 80, attackPower: 2, counterAttackPower: 2}
   // var bob = {healthPoints: 220, attackPower: 7, counterAttackPower: 7}
   // var dude = {healthPoints: 200, attackPower 6, counterAttackPower: 6}
+  var attackPower = 8;
+
+
+  $("#button-1").on("click", function() {
+    attackClicks += 1;
+    alert((jay.healthPoints) - (attackClicks * attackPower)); 
+  });
+
+
 
   
 
