@@ -79,7 +79,7 @@ $(document).ready(function() {
   
 
   var jay = {healthPoints:120, attackPower:8, counterAttackPower: 8}
-  // var mark = {healthPoints: 180, attackPower: 6, counterAttackPower: 6}
+  var mark = {healthPoints: 180, attackPower: 6, counterAttackPower: 6}
   // var puffin = {healthPoints: 80, attackPower: 2, counterAttackPower: 2}
   // var bob = {healthPoints: 220, attackPower: 7, counterAttackPower: 7}
   // var dude = {healthPoints: 200, attackPower 6, counterAttackPower: 6}
@@ -88,8 +88,15 @@ $(document).ready(function() {
 
   $("#button-1").on("click", function() {
     attackClicks += 1;
-    alert((jay.healthPoints) - (attackClicks * attackPower)); 
+    alert((mark.healthPoints) - (attackClicks * jay.attackPower)); 
   });
+
+  // more pseudocoding assuming jay is hero and mark is opponent 
+  // jay.healthPoints = jay.healthpoints - counterAttackPower
+  // if jay.healthPoints <= 0 set up alert you lose
+  // if mark.healthpoints <= 0, and no characters remaining, set up alert you win 
+  
+  
 
 
 
