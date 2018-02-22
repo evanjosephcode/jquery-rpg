@@ -1,392 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>jQuery RPG</title>
 
   <!-- Added link to the jQuery Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- Added a link to Bootstrap-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
 
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
+
 <body>
 
-<div class="jumbotron">
+  <div class="jumbotron">
     <h1 class="text-center">jQuery RPG</h1>
     <h3 class="text-center instructions">Pick a character, and choose wisely Young Game Consumer-Padawan</h3>
     <h3 class="text-center force">... (I am one with the force, and the force is one with me)</h3>
-</div>
+  </div>
 
-<div class="row">
-  <div id="chosen" class="chosen col-lg-4 col-md-4">Text </div>
-  <div class="text-center versus col-lg-4 col-md-4"></div>
-  <div id="enemy" class="enemydisplay col-lg-4 col-md-4"></div>
-</div>
-<div class="row">
+  <div class="row">
+    <div id="chosen" class="chosen col-lg-4 col-md-4">Text </div>
+    <div class="text-center versus col-lg-4 col-md-4"></div>
+    <div id="enemy" class="enemydisplay col-lg-4 col-md-4"></div>
+  </div>
+  <div class="row">
     <div class="col-lg-4 col-md-4"></div>
     <div class="col-lg-4 col-md-4">
-      <button id="button-1" class="btn btn-primary number"><p>Attack</p></button>
+      <button id="button-1" class="btn btn-primary number">
+        <p>Attack</p>
+      </button>
     </div>
     <div class="col-lg-4 col-md-4"></div>
   </div>
 
-<div class="row"></div>
+  <div class="row"></div>
   <div id="images" class="text-center images col-lg-12 col-md-12">
-      <img id="jay" class="jay" src="assets/images/j.jpg" alt="Jay from Jay and Silent Bob">
-      <img class="mark" src="assets/images/m.jpg" alt="Evil Mark Hamill">
-      <img class="puffin" src="assets/images/p.jpg" alt="Puffin">
-      <img class="bob" src="assets/images/s.jpg" alt="Silent Bob">
-      <img class="dude" src="assets/images/w.jpg" alt="The Dude">
+    <img id="jay" class="jay img" data-name="jay" src="assets/images/j.jpg" alt="Jay from Jay and Silent Bob">
+    <img class="mark img" data-name="mark" src="assets/images/m.jpg" alt="Evil Mark Hamill">
+    <img class="puffin img" data-name="puffin" src="assets/images/p.jpg" alt="Puffin">
+    <img class="bob img" data-name="bob" src="assets/images/s.jpg" alt="Silent Bob">
+    <img class="dude img" data-name="dude" src="assets/images/w.jpg" alt="The Dude">
   </div>
-</div>
+  </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
+    $(document).ready(function () {
 
-$(document).ready(function() {
+    alert(
+    "click the character you want to be, then click the one you want to fight, then click YOUR character TO FIGHT"
+    );
 
-  alert("click the character you want to be, then click the one you want to fight, then click YOUR character TO FIGHT");
+    //to take place of character selected 
+    var hero = "";
+    var opponent = ""; 
+    //counters for # of attacks and wins
+    var attackClicks = 0;
+    var wins = 0;
+    // objects
+    var characters = {
+            jay: {
+              healthPoints: 120,
+              attackPower: 8,
+              counterAttackPower: 8,
+              name: "jay"
+            },
+            mark: {
+              healthPoints: 180,
+              attackPower: 6,
+              counterAttackPower: 6,
+              name: "mark"
+            },
+            puffin: {
+              healthPoints: 80,
+              attackPower: 2,
+              counterAttackPower: 2,
+              name: "puffin"
+            },
+            bob: {
+              healthPoints: 220,
+              attackPower: 7,
+              counterAttackPower: 7,
+              name: "bob"
+            },
+            dude: {
+              healthPoints: 200,
+              attackPower: 6,
+              counterAttackPower: 6,
+              name: "dude"
 
-  // $("#images").on("click", function() {
-      // if (counterChar >= 3) {
-      // alert("click your character, fool");
-  // }
-  // });
+            }
+    };
 
+    $("#button-1").on("click", function () {
+      attackClicks += 1;
+      hero.healthPoints = hero.healthPoints - opponent.counterAttackPower;
+      opponent.healthPoints = opponent.healthPoints - hero.attackPower*attackClicks;
+      console.log("your "+hero.name+" has "+hero.healthPoints+" and "+opponent.name+" has "+opponent.healthPoints); 
+    });
 
+    $(".img").on("click", function () {
+      var thisCharacterName = $(this).attr("data-name");
+      var thisCharacter = characters[thisCharacterName];
+        console.log(thisCharacter); 
+        hero = thisCharacter;
+        alert("you chose "+hero.name);
+        $(this).detach().appendTo(".chosen");
+        $(this).off("click");
+      $(".img").not($(this)).on("click", function () {
+        var secondCharacterName = $(this).attr("data-name");
+        var secondCharacter = characters[secondCharacterName];
+        console.log(secondCharacter);
+        opponent = secondCharacter;
+        $(this).addClass("enemy");
+        $(".versus").empty();
+        $(this).detach().appendTo(".enemydisplay");
+        $('<p>VERSUS</p>').appendTo(".versus");
+        $(this).off("click");
+      });
+    });
 
-  var isCharacterChosen = false;
-  var markChosen = false; 
-  var counterChar = 0
-  //hp for chars for reference 
-  // var hpJay = 120
-  //var hpMark = 180
-  // var hpPuffin = 80
-  // var hpBob = 220
-  // var hpDude = 200
-  var hero = "";
-  var opponent = "";
-  var attackClicks = 0
-
-
-
-  
-
-  var jay = {healthPoints:120, attackPower:8, counterAttackPower: 8}
-  var mark = {healthPoints: 180, attackPower: 6, counterAttackPower: 6}
-  var puffin = {healthPoints: 80, attackPower: 2, counterAttackPower: 2}
-  var bob = {healthPoints: 220, attackPower: 7, counterAttackPower: 7}
-  var dude = {healthPoints: 200, attackPower: 6, counterAttackPower: 6}
-  var attackPower = 8;
-
-
-  $("#button-1").on("click", function() {
-    attackClicks += 1;
-    jay.healthPoints = jay.healthPoints - mark.counterAttackPower*attackClicks;
-    alert(jay.healthPoints); 
-  });
-
-  // more pseudocoding assuming jay is hero and mark is opponent 
-
-  // hero.healthPoints = hero.healthPoints - opponent.counterAttackPower
-  // opponent.healthPoints = opponent.healthPoints - hero.attackPower*attackClicks
-
-  // if jay.healthPoints <= 0 set up alert you lose
-  // if mark.healthpoints <= 0, and no characters remaining, set up alert you win 
-  
-  // other questions, giving attributes a caption for the pictures, not being able to select
-  // other chars in the middle of game, 
-  // how to assign charName to var hero or var opponent to do the algorhthm from there
-  // add var wins and wins += 1 for when enemy.healthPoints <= 0 to prompt a win alert
-
-
-  
-
-
-  $(".jay").on("click", function() {
-
-  counterChar += 1
-
-
-  if (counterChar === 1) {
-    alert("you chose Jay as your dude, he has 120 health!");
-    $("#images img.jay").detach().appendTo(".chosen");
-    hero = 120; 
-    $(".jay").addClass("test"); 
-      
+    if (opponent.healthPoints <= 0) {
+      $(".enemy").remove();
+      $(".versus").empty();
+      alert("you beat "+opponent.name);
+      wins += 1;
     }
 
-
-
-  if (counterChar === 2) {
-    if ($(this).hasClass('test')) {
-    
-    
-      alert("you cant fight against yourself, at least in this game!");
-      counterChar = 1; 
+    if (wins === 4) {
+      alert("you have beat the game, amazing!");
+      location.reload(); 
     }
 
-    else {
-    $("#images img.jay").detach().appendTo(".enemydisplay");
-    $('<p>VERSUS</p>').appendTo(".versus");
-    opponent = 120; 
-    alert("You chose Jay as your enemy, he has 120 health")
-    alert("its time to battle!");
-    $(".jay").addClass("enemy");
-  }}
-
-
-  if (counterChar >= 3) {
-    opponent -= 80;
-    hero -= 10; 
-    alert("This is your opponent's health "+ opponent);
-    alert("This is your health "+hero);
-    
-    if (opponent <= 0) {
-    alert("you beat the enemy!");
-    $(".enemy").remove();
-    $(".versus").empty();
-    counterChar = 1;
+    if (hero.healthPoints <= 0) {
+      alert("the game has beat you, your skills are not that amazing");
+      location.reload(); 
+    }
 
     
-
-  }
-
-  }
-
-  if (hero <= 0) {
-    alert("the enemy beat you -- game over!");
-  }
-  
 
   });
-
-  // now for Mark 
-
-  $(".mark").on("click", function() {
-  counterChar += 1;
-
-
-
-  if (counterChar === 1) {
-    $("#images img.mark").detach().appendTo(".chosen");
-    hero = 180; 
-    alert("you chose Mark as your dude, he has 180 health!");
-    $(".mark").addClass("test");
-
-  }
-
-  if (counterChar === 2) {
-    if ($(this).hasClass('test')) {
-    
-    
-    alert("you cant fight against yourself, at least in this game!");
-    counterChar = 1; 
-  }
-
-  else {
-    alert("You chose Mark as your enemy, he has 180 health")
-    alert("its time to battle!");
-    $("#images img.mark").detach().appendTo(".enemydisplay");
-    $('<p>VERSUS</p>').appendTo(".versus");
-    opponent = 180;
-    $(".mark").addClass("enemy");
-
-  }
-    
-
-
-  }
-
-  if (counterChar >= 3) {
-
-
-    opponent -= 60;
-    hero -= 10; 
-    alert("This is your opponent's health "+ opponent);
-    alert("This is your health "+hero);
-    
-    if (opponent <= 0) {
-    alert("you beat the enemy!");
-    $(".enemy").remove();
-    $(".versus").empty();
-    counterChar = 1; 
-  
-    }}
-
-
-
-  });
-
-  //puffin 
-
-  $(".puffin").on("click", function() {
-  counterChar += 1;
-
-  if (counterChar === 1) {
-  alert("You chose dubious Disney Puffin, he has 80 health!");
-  $("#images img.puffin").detach().appendTo(".chosen");
-  hero = 80; 
-  $(".puffin").addClass("test");
-
-  }
-
-  if (counterChar === 2) {
-    if ($(this).hasClass('test')) {
-    
-    
-    alert("you cant fight against yourself, at least in this game!");
-    counterChar = 1; 
-  }
-
-  else {
-
-  
-  opponent = 80;
-  $(".puffin").addClass("enemy");
-  alert("you chose dubious Disney Puffin as the enemy, he has 80 health!");
-  alert("its time to battle!");
-  $('<p>VERSUS</p>').appendTo(".versus");
-  $("#images img.puffin").detach().appendTo(".enemydisplay");
-  }
-}
-
-  if (counterChar >= 3) {
-    opponent -= 10;
-    hero -= 20; 
-    alert("This is your opponent's health "+ opponent);
-    alert("This is your health "+hero);
-    
-    if (opponent <= 0) {
-    alert("you beat the enemy!");
-    $(".enemy").remove();
-    $(".versus").empty();
-    counterChar = 1; 
-  
-    }}
-
-  if (hero <= 0) {
-    alert("you lost!")
-    location.reload();
-  }
-
-
-
-  });
-
-  //bob 
-
-  $(".bob").on("click", function() {
-  counterChar += 1;
-
-  if (counterChar === 1) {
-    alert("You chose introspective Silent Bob, he has 220 health!");
-    hero = 220; 
-    $("#images img.bob").detach().appendTo(".chosen");
-    $(".bob").addClass("test");
-
-
-
-  }  
-
-  if (counterChar === 2) {
-    if ($(this).hasClass('test')) {
-    
-    
-    alert("you cant fight against yourself, at least in this game!");
-    counterChar = 1; 
-  }
-
-  else {
-
-
-  alert("you chose introspective Silent Bob as the enemy, he has 220 health!")
-  alert("its time to battle!");
-  opponent = 220; 
-  $(".bob").addClass("enemy");
-  $('<p>VERSUS</p>').appendTo(".versus");
-  $("#images img.bob").detach().appendTo(".enemydisplay");
-
-
-  }
-  }
-
-  if (counterChar >= 3) {
-    opponent -= 80;
-    hero -= 20; 
-    alert("This is your opponent's health "+ opponent);
-    alert("This is your health "+hero);
-    
-    if (opponent <= 0) {
-    alert("you beat the enemy!");
-    $(".enemy").remove();
-    $(".versus").empty();
-    counterChar = 1; 
-
-  }
-
-  }
-
-  });
-
-  //dude
-
-  $(".dude").on("click", function() {
-  counterChar += 1;
-
-  if (counterChar === 1) {
-
-
-  alert("You chose the Dude, sweet dude he has 200 health!");
-  $("#images img.dude").detach().appendTo(".chosen");
-  hero = 200; 
-  $(".dude").addClass("test");
-
-  }
-
-  if (counterChar === 2) {
-    if ($(this).hasClass('test')) {
-    
-    
-    alert("you cant fight against yourself, at least in this game!");
-    counterChar = 1; 
-  }
-  
-
-  else {
-    oponent = 200; 
-    alert("you chose the dude as your enemy, he has 200 health!")
-    alert("its time to battle!");
-    $(".dude").addClass("enemy");
-    $('<p>VERSUS</p>').appendTo(".versus");
-    $("#images img.dude").detach().appendTo(".enemydisplay");
-  }
-  }
-
-  if (counterChar >= 3) {
-    opponent -= 80;
-    hero -= 20; 
-    alert("This is your opponent's health "+ opponent);
-    alert("This is your health "+hero);
-    
-    if (opponent <= 0) {
-    alert("you beat the enemy!");
-    $(".enemy").remove();
-    $(".versus").empty();
-    counterChar = 1; 
-
-  }};
-  });
-});
-
-
-</script>
-
+  </script>
 </body>
 </html>
