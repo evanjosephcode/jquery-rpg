@@ -1,22 +1,26 @@
+body {
+    background-color: blue;
+}
+
 .jumbotron {
-    background-color: rgba(20, 52, 238, 0.829);
+    background-color: rgba(238, 20, 20, 0.829);
 }
 
 h1 {
-font-family: 'Permanent Marker', cursive;
+font-family: 'Hammersmith One', sans-serif;
 font-size: 80px;
 color: white;
 }
 
 .instructions {
-font-family: 'Rock Salt', cursive;
+font-family: 'Jura', sans-serif;
 font-size: 24px;
 color: rgba(221, 243, 22, 0.89);
 }
 
 .force {
-font-family: 'Rock Salt', cursive;
-font-size: 18px;
+font-family: 'Jura', sans-serif;
+font-size: 20px;
 color: orange;
 
 }
@@ -34,4 +38,23 @@ color: orange;
 
 .mark {
     padding: 0px;
+}
+
+#button-1 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.versus {
+    color: white;
+}
+
+.chosenimg {
+    margin-left: 100px;
+}
+
+.buttondiv {
+    text-align: center;
 }
