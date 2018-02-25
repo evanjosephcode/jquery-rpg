@@ -1,5 +1,7 @@
 body {
     background-color: blue;
+    overflow-x: hidden;
+    
 }
 
 .jumbotron {
@@ -25,10 +27,6 @@ color: orange;
 
 }
 
-.images {
-    clear: both;
-}
-
 .test {
     border-style: solid;
     border-width: 10px;
@@ -49,12 +47,41 @@ color: orange;
 
 .versus {
     color: white;
+    margin-top: 125px;
 }
 
-.chosenimg {
-    margin-left: 100px;
+
+
+/* .img-container {
+    position: relative;
 }
 
-.buttondiv {
-    text-align: center;
+.text-block {
+    position: absolute;
+    top: 10px; 
+    left: 10px;
+    background-color:red;
+    color: white;
 }
+
+*/
+
+h4 {
+    position: absolute;
+    top: 0px; 
+    left: 15px;
+    background-color: red;
+    color: white;
+}
+
+.imgc {
+    margin-left: 10px;
+}
+
+
+
+
+/* @media screen and (max-width: 768px) { */
+
+
+

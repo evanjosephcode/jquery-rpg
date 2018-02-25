@@ -6,7 +6,6 @@
     <title>jQuery RPG</title>
 
     <!-- Added link to the jQuery Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Added a link to Bootstrap-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
@@ -28,144 +27,39 @@
 </div>
 
 <div class="row">
-    <div id="chosen" class="chosen col-lg-4 col-md-4"></div>
-    <div class="text-center versus col-lg-4 col-md-4"></div>
-    <div id="enemy" class="enemydisplay col-lg-4 col-md-4"></div>
+    <div id="chosen" class="text-center chosen col-lg-4 col-md-4 sm-12"></div>
+    <div class="text-center versus col-lg-4 col-md-4 sm-12"></div>
+    <div id="enemy" class="text-center enemydisplay col-lg-4 col-md-4 sm-12"></div>
 </div>
 <div class="row">
     <div class="col-lg-4 col-md-4"></div>
-    <div class="buttondiv col-lg-4 col-md-4">
-        <button id="button-1" class="btn btn-primary number">
+    <div class="text-center buttondiv col-lg-4 col-md-4">
+        <button id="button-1" class="text-center btn btn-primary number">
             <p>Attack</p>
         </button>
     </div>
     <div class="col-lg-4 col-md-4"></div>
 </div>
 
-<div class="row"></div>
-<div id="images" class="text-center images col-lg-12 col-md-12">
-    <img id="jay" class="jay img" data-name="jay" src="assets/images/j.jpg" alt="Jay from Jay and Silent Bob">
-    <img class="mark img" data-name="mark" src="assets/images/m.jpg" alt="Evil Mark Hamill">
-    <img class="puffin img" data-name="puffin" src="assets/images/p.jpg" alt="Puffin">
-    <img class="bob img" data-name="bob" src="assets/images/s.jpg" alt="Silent Bob">
-    <img class="dude img" data-name="dude" src="assets/images/w.jpg" alt="The Dude">
+<div class="row">
+    <div class="col jaycontain imgc">
+        <img id="jay" class="jay img" data-name="jay" src="assets/images/j.jpg" alt="Jay from Jay and Silent Bob">  
+    </div>
+    <div class="col imgc markcontain">
+        <img class="mark img" data-name="mark" src="assets/images/m.jpg" alt="Evil Mark Hamill">
+    </div>
+    <div class="col imgc puffincontain">
+        <img class="puffin img" data-name="puffin" src="assets/images/p.jpg" alt="Puffin">
+    </div>
+    <div class="col imgc bobcontain">
+        <img class="bob img" data-name="bob" src="assets/images/s.jpg" alt="Silent Bob">
+    </div>
+    <div class="col imgc dudecontain">
+        <img class="dude img" data-name="dude" src="assets/images/w.jpg" alt="The Dude">
+    </div>
 </div>
-</div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        alert(
-            "click the character you want to be, then click the one you want to fight, then click ATTACK button to ATTACK!!!!"
-        );
-
-        //to take place of character selected
-        var hero;
-        var opponent;
-        //counters for # of attacks and wins
-        var attackClicks = 0;
-        var wins = 0;
-        // objects
-        var characters = {
-            jay: {
-                healthPoints: 120,
-                attackPower: 8,
-                counterAttackPower: 8,
-                name: "jay"
-            },
-            mark: {
-                healthPoints: 180,
-                attackPower: 6,
-                counterAttackPower: 6,
-                name: "mark"
-            },
-            puffin: {
-                healthPoints: 80,
-                attackPower: 2,
-                counterAttackPower: 2,
-                name: "puffin"
-            },
-            bob: {
-                healthPoints: 220,
-                attackPower: 7,
-                counterAttackPower: 7,
-                name: "bob"
-            },
-            dude: {
-                healthPoints: 200,
-                attackPower: 6,
-                counterAttackPower: 6,
-                name: "dude"
-
-            }
-        };
-
-        $("#button-1").on("click", function () {
-            if (opponent == null) {
-                alert("You can't fight noone...can you?")
-            } else {
-                attackClicks += 1;
-                hero.healthPoints = hero.healthPoints - opponent.counterAttackPower;
-                opponent.healthPoints = opponent.healthPoints - hero.attackPower * attackClicks;
-                console.log("your " + hero.name + " has " + hero.healthPoints + " and " + opponent.name + " has " + opponent.healthPoints);
-
-                //Checks for game winning after clicking attack
-
-                //Opponent Defeated
-                if (opponent.healthPoints <= 0) {
-                    $(".enemy").remove();
-                    $(".versus").empty();
-                    alert("you beat " + opponent.name);
-                    wins += 1;
-                    opponent = null;
-                }
-
-                //
-                if (wins === 4) {
-                    alert("you have beat the game, amazing!");
-                    location.reload();
-                }
-
-                if (hero.healthPoints <= 0) {
-                    alert("the game has beat you, your skills are not that amazing");
-                    location.reload();
-                }
-            }
-        });
-        // Any image that has not been clicked yet
-        $(".img").on("click", function () {
-            if (hero == null) {
-                var thisCharacterName = $(this).attr("data-name");
-                var thisCharacter = characters[thisCharacterName];
-                hero = thisCharacter;
-                console.log(hero);
-                $(this).addClass("chosenimg");
-                $(this).detach().appendTo(".chosen");
-                $(this).off("click");
-                alert("you chose " + $(this).attr("data-name"));
-            } 
-            
-            else if (opponent == null) {
-                var secondCharacterName = $(this).attr("data-name");
-                var secondCharacter = characters[secondCharacterName];
-                opponent = secondCharacter;
-                console.log(opponent);
-                $(this).addClass("enemy");
-                $(".versus").empty();
-                $(this).detach().appendTo(".enemydisplay");
-                $('<p>VERSUS</p>').appendTo(".versus");
-                $(this).off("click");
-                alert("you chose " + $(this).attr("data-name"));
-            }
-        
-            else {
-                alert("the arena is full");
-            }
-            
-        });
-
-
-    });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 </html>
