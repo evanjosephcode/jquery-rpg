@@ -85,7 +85,7 @@ $(document).ready(function () {
                     location.reload();
                 }
                 if (hero.healthPoints <= 0) {
-                    alert("the game has beat you, your skills are not that amazing");
+                    alert("the game has you beat, your skills are not good (and/or you picked puffin)");
                     location.reload();
                 }
             }
