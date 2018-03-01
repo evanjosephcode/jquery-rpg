@@ -55,7 +55,7 @@ $(document).ready(function () {
 
         $("#button-1").on("click", function () {
             if (opponent == null) {
-                $("h1").text("Choose a friggin enemy already")
+                $("h1").text("Choose a friggin enemy already");
             } else {
                 attackClicks += 1;
                 var compoundedAttack = hero.attackPower * attackClicks;

@@ -51,21 +51,6 @@ color: orange;
 }
 
 
-
-/* .img-container {
-    position: relative;
-}
-
-.text-block {
-    position: absolute;
-    top: 10px; 
-    left: 10px;
-    background-color:red;
-    color: white;
-}
-
-*/
-
 h4 {
     position: absolute;
     top: 0px; 
@@ -77,12 +62,7 @@ h4 {
 .imgc {
     margin-left: 10px;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
-
-
-
-
-/* @media screen and (max-width: 768px) { */
-
 
 
