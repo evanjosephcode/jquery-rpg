@@ -51,31 +51,29 @@ $(document).ready(function () {
         $(".dudecontain").append("<h4>Health "+characters.dude.healthPoints+"</h4>");
 
 
-
-
-        //$(".imgc").append("<h4>Health: "+thisCharacter.healthPoints+"</h4>");
-        // $(".markcontain").append("<h4>Health "+characters.mark.healthPoints+"</h4>");
-
         
 
         $("#button-1").on("click", function () {
             if (opponent == null) {
-                alert("You can't fight noone...can you?")
+                $("h1").text("Choose a friggin enemy already")
             } else {
                 attackClicks += 1;
+                var compoundedAttack = hero.attackPower * attackClicks;
                 hero.healthPoints = hero.healthPoints - opponent.counterAttackPower;
-                opponent.healthPoints = opponent.healthPoints - hero.attackPower * attackClicks;
+                opponent.healthPoints = opponent.healthPoints - compoundedAttack;
                 // added .text on h4 specific divs for healthpoints 
                 $(".chosen h4").text("Health "+hero.healthPoints);
                 $(".enemydisplay h4").text("Health "+opponent.healthPoints);
-                console.log("your " + hero.name + " has " + hero.healthPoints + " and " + opponent.name + " has " + opponent.healthPoints);
+                $(".instructions").empty().append(hero.name+" has inflicted "+compoundedAttack+" damage points and "+opponent.name+" has inflicted "+opponent.counterAttackPower+" damage points.").css("font-size", "32px").css("font-weight", "bold");
+                
                 //Checks for game winning after clicking attack
                 //Opponent Defeated
                 if (opponent.healthPoints <= 0) {
                     $(".enemydisplay h4").remove();
                     $(".enemy").remove();
                     $(".versus").empty();
-                    alert("you beat " + opponent.name);
+                    $(".versus").append("<h2>You beat: "+opponent.name+"</h2>");
+                    $("body").css("background-color", "#8b0000");
                     wins += 1;
                     opponent = null;
                 }
@@ -101,7 +99,9 @@ $(document).ready(function () {
                 $(this).parent().detach().appendTo(".chosen");
                 $(".chosen h4").text("Health "+hero.healthPoints).css("background-color", "blue");
                 $(this).off("click");
-                alert("you chose " + $(this).attr("data-name"));
+                // console.log("you chose " + $(this).attr("data-name"));
+                $(".versus").append("<h2>"+$(this).attr("data-name")+"</h2");
+
             } 
             
             else if (opponent == null) {
@@ -113,9 +113,15 @@ $(document).ready(function () {
                 $(".versus").empty();
                 $(this).parent().detach().appendTo(".enemydisplay");
                 $(".enemydisplay h4").text("Health "+opponent.healthPoints).css("background-color", "blue");
-                $('<p>VERSUS</p>').appendTo(".versus");
+                $(".versus").append("<h2>"+hero.name+"</h2");
+                $(".versus").append("versus");
                 $(this).off("click");
-                alert("you chose " + $(this).attr("data-name"));
+                // console.log ("you chose " + $(this).attr("data-name"));
+                $(".versus").append("<h2>"+$(this).attr("data-name")+"</h2>");
+                $("body").css("background-color", "blue");
+                $("h1").empty().append("jayQuery R-P//uffin-G");
+                $(".instructions").empty().css("font-weight", "").css("font-size", "").append("Pick a character, and choose wisely Young Game Consumer-Padawan");
+
             }
         
             else {
