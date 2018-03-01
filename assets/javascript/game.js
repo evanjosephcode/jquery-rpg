@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
         alert(
             "click the character you want to be, then click the one you want to fight, then click ATTACK button to ATTACK!!!! Note- every time you attack, enemy damage goes up even more"
         );
@@ -55,7 +56,7 @@ $(document).ready(function () {
 
         $("#button-1").on("click", function () {
             if (opponent == null) {
-                $("h1").text("Choose a friggin enemy already");
+                $("h1").text("Choose someone already");
             } else {
                 attackClicks += 1;
                 var compoundedAttack = hero.attackPower * attackClicks;
