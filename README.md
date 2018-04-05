@@ -1,5 +1,5 @@
 # jayQuery R-P//uffin-G
-## Simple button-click driven rpg with whacky character<br>
+## Simple button-click driven rpg with whacky characters<br>
 ## created using jQuery
 *pick a character*<br>
 *pick an enemy*<br>
